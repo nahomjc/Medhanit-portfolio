@@ -17,7 +17,7 @@ export default function VideoSection() {
     views: "25.3K",
     likes: "1.2K",
     videoUrl:
-      "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ",
+      "https://www.youtube.com/embed/ArBS88h1r2Q?autoplay=1&mute=1&loop=1&playlist=ArBS88h1r2Q",
     technologies: ["Adobe Premiere Pro", "After Effects", "Motion Graphics"],
     stats: { episodes: "24", students: "2,500+", completion: "94%" },
   };
@@ -152,8 +152,8 @@ export default function VideoSection() {
         transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
       >
         {/* Video Container - Full Width */}
-        <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden">
-          {/* Auto-playing Video */}
+        <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
+          {/* Auto-playing Video - Full Width */}
           <iframe
             src={featuredVideo.videoUrl}
             title={featuredVideo.title}
@@ -162,17 +162,17 @@ export default function VideoSection() {
             allowFullScreen
           ></iframe>
 
-          {/* Video Info Overlay */}
-          <div className="absolute bottom-8 left-8 right-8">
-            <div className="flex justify-between items-end">
-              <div>
+          {/* Video Info Overlay - Hidden on Mobile */}
+          <div className="hidden sm:block absolute bottom-8 left-8 right-8">
+            <div className="flex flex-row justify-between items-end">
+              <div className="flex-1">
                 <span className="px-4 py-2 bg-red-400/90 text-white text-sm font-semibold rounded-full backdrop-blur-sm mb-4 inline-block">
                   {featuredVideo.category}
                 </span>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                   {featuredVideo.title}
                 </h3>
-                <p className="text-gray-200 text-lg leading-relaxed max-w-2xl">
+                <p className="text-gray-200 text-base md:text-lg leading-relaxed max-w-2xl">
                   {featuredVideo.description}
                 </p>
               </div>
@@ -184,8 +184,8 @@ export default function VideoSection() {
             </div>
           </div>
 
-          {/* Video Stats */}
-          <div className="absolute top-8 left-8 flex space-x-6">
+          {/* Video Stats - Hidden on Mobile */}
+          <div className="hidden sm:flex absolute top-8 left-8 space-x-6">
             <div className="flex items-center space-x-2 bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm">
               <svg
                 className="w-5 h-5 text-red-400"
@@ -212,8 +212,8 @@ export default function VideoSection() {
             </div>
           </div>
 
-          {/* Technologies */}
-          <div className="absolute top-8 right-8">
+          {/* Technologies - Hidden on Mobile */}
+          <div className="hidden sm:block absolute top-8 right-8">
             <div className="flex flex-wrap gap-2 justify-end">
               {featuredVideo.technologies.map((tech, techIndex) => (
                 <span
@@ -228,10 +228,10 @@ export default function VideoSection() {
         </div>
       </motion.div>
 
-      {/* Video Stats Below */}
+      {/* Video Stats Below - Mobile Responsive */}
       <div className="container relative z-10">
         <motion.div
-          className="mt-8 grid grid-cols-3 gap-6"
+          className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
@@ -240,25 +240,27 @@ export default function VideoSection() {
             ([key, value], statIndex) => (
               <div
                 key={statIndex}
-                className="text-center p-6 bg-gray-900/50 border border-red-400/20 rounded-xl"
+                className="text-center p-4 sm:p-6 bg-gray-900/50 border border-red-400/20 rounded-xl"
               >
-                <div className="text-3xl font-bold text-red-400 mb-2">
+                <div className="text-2xl sm:text-3xl font-bold text-red-400 mb-1 sm:mb-2">
                   {value}
                 </div>
-                <div className="text-sm text-gray-400 capitalize">{key}</div>
+                <div className="text-xs sm:text-sm text-gray-400 capitalize">
+                  {key}
+                </div>
               </div>
             )
           )}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Call to Action - Mobile Responsive */}
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
         >
-          <button className="px-8 py-4 bg-red-400 hover:bg-red-500 text-white font-semibold rounded-full transition-all duration-300 hover-lift transform hover:scale-105">
+          <button className="px-6 py-3 sm:px-8 sm:py-4 bg-red-400 hover:bg-red-500 text-white font-semibold rounded-full transition-all duration-300 hover-lift transform hover:scale-105 text-sm sm:text-base">
             Watch Full Video
           </button>
         </motion.div>

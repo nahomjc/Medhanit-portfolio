@@ -120,8 +120,39 @@ export default function ChatBot() {
     }
   };
 
+  const handlePhoneCall = () => {
+    // You can replace this with the actual phone number
+    window.open("tel:+1234567890", "_self");
+  };
+
   return (
     <>
+      {/* Phone Call Button */}
+      <motion.button
+        className="fixed bottom-24 right-6 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover-lift z-50"
+        onClick={handlePhoneCall}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 1.5, type: "spring", stiffness: 200 }}
+        title="Call Medhanit"
+      >
+        <svg
+          className="w-6 h-6 mx-auto"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+          />
+        </svg>
+      </motion.button>
+
       {/* Chat Toggle Button */}
       <motion.button
         className="fixed bottom-6 right-6 w-16 h-16 bg-red-400 hover:bg-red-500 text-white rounded-full shadow-lg hover-lift z-50"
@@ -172,7 +203,7 @@ export default function ChatBot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-24 right-6 w-96 h-[500px] bg-gray-900 border border-red-400/20 rounded-2xl shadow-2xl z-40 flex flex-col"
+            className="fixed bottom-32 right-6 w-96 h-[500px] bg-gray-900 border border-red-400/20 rounded-2xl shadow-2xl z-40 flex flex-col"
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
