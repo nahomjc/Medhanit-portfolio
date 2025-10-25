@@ -34,10 +34,10 @@ export default function ChatBot() {
 
   const predefinedQuestions = [
     "Tell me about Medhanit's experience",
-    "What courses has he managed?",
-    "Show me his design portfolio",
+    "What courses has she managed?",
+    "Show me her design portfolio",
     "How can I contact him?",
-    "What technologies does he use?",
+    "What technologies does she use?",
   ];
 
   const botResponses: { [key: string]: string } = {
@@ -83,6 +83,7 @@ export default function ChatBot() {
     if (!inputText.trim()) return;
 
     const userMessage: Message = {
+      // eslint-disable-next-line react-hooks/purity
       id: Date.now(),
       text: inputText,
       isUser: true,
@@ -186,7 +187,7 @@ export default function ChatBot() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold">
-                      Medhanit's Assistant
+                      Medhanit&apos;s Assistant
                     </h3>
                     <p className="text-red-400 text-xs">Online now</p>
                   </div>

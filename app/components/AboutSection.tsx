@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,26 +28,49 @@ export default function AboutSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="relative">
-              {/* Placeholder for profile image */}
-              <div className="w-full h-96 bg-linear-to-br from-red-400/20 to-red-400/10 rounded-2xl flex items-center justify-center border border-red-400/30">
-                <div className="text-center">
-                  <div className="w-32 h-32 bg-red-400/30 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-red-400">MB</span>
-                  </div>
-                  <p className="text-red-300">Professional Headshot</p>
-                </div>
+              {/* Professional Headshot */}
+              <div className="relative w-full h-96 rounded-2xl overflow-hidden border-2 border-red-400/30">
+                <Image
+                  src="/medi/pic2.png"
+                  alt="Medhanit Birhane - Professional Headshot"
+                  width={600}
+                  height={800}
+                  className="w-full h-full object-cover"
+                />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 pointer-events-none"></div>
               </div>
 
               {/* Floating Cards */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-red-400/20 border border-red-400/30 rounded-xl flex items-center justify-center animate-pulse">
+              <motion.div
+                className="absolute -top-4 -right-4 w-24 h-24 bg-red-400/20 border border-red-400/30 rounded-xl flex items-center justify-center backdrop-blur-sm shadow-xl"
+                animate={{
+                  y: [0, -5, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
                 <span className="text-red-400 font-bold text-sm">5+ Years</span>
-              </div>
-              <div
-                className="absolute -bottom-4 -left-4 w-20 h-20 bg-red-400/20 border border-red-400/30 rounded-lg flex items-center justify-center animate-pulse"
-                style={{ animationDelay: "1s" }}
+              </motion.div>
+              <motion.div
+                className="absolute -bottom-4 -left-4 w-20 h-20 bg-red-400/20 border border-red-400/30 rounded-lg flex items-center justify-center backdrop-blur-sm shadow-xl"
+                animate={{
+                  y: [0, -5, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
               >
                 <span className="text-red-300 font-bold text-xs">Expert</span>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 

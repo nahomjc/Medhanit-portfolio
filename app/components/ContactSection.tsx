@@ -83,11 +83,11 @@ export default function ContactSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Let's <span className="gradient-text">Connect</span>
+            Let&apos;s <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Ready to discuss your next project? I'd love to hear from you and
-            explore how we can work together.
+            Ready to discuss your next project? I&apos;d love to hear from you
+            and explore how we can work together.
           </p>
         </motion.div>
 
@@ -254,7 +254,8 @@ export default function ContactSection() {
           transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
         >
           <p className="text-gray-400">
-            © 2024 Medhanit Birhane. All rights reserved. | Designed with ❤️
+            © {new Date().getFullYear()} Medhanit Birhane. All rights reserved.
+            | Designed with ❤️
           </p>
         </motion.div>
       </div>

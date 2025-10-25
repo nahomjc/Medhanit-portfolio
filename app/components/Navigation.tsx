@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,10 +19,11 @@ export default function Navigation() {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Work", href: "#showcase" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "#home", type: "section" },
+    { name: "About", href: "#about", type: "section" },
+    { name: "Work", href: "#showcase", type: "section" },
+    { name: "Blog", href: "/blog", type: "page" },
+    { name: "Contact", href: "#contact", type: "section" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -29,6 +32,19 @@ export default function Navigation() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMobileMenuOpen(false);
+  };
+
+  const handleNavClick = (item: { href: string; type: string }) => {
+    if (item.type === "page") {
+      router.push(item.href);
+    } else {
+      scrollToSection(item.href);
+    }
+  };
+
+  const handleLogoClick = () => {
+    // Scroll to top of page for home navigation
+    router.push("/");
   };
 
   return (
@@ -52,12 +68,13 @@ export default function Navigation() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.button
-              onClick={() => scrollToSection("#home")}
+              onClick={handleLogoClick}
               className="flex items-center space-x-4 group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               {/* Professional Logo */}
+
               <div className="relative">
                 <div className="w-12 h-12 bg-gradient-to-br from-red-400 via-red-400 to-red-400 rounded-xl flex items-center justify-center shadow-xl">
                   <span className="text-white font-bold text-xl">M</span>
@@ -106,7 +123,7 @@ export default function Navigation() {
                 transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
               >
                 <motion.button
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavClick(item)}
                   className="relative px-6 py-3 text-gray-300 hover:text-white font-semibold transition-all duration-300 group-hover:bg-white/5 rounded-xl backdrop-blur-sm"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
@@ -156,12 +173,12 @@ export default function Navigation() {
           {/* Professional Mobile Menu Button */}
           <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden relative w-10 h-10 bg-red-400/20 border border-red-400/30 rounded-lg flex items-center justify-center text-white hover:text-red-400 transition-all duration-300 hover:bg-red-400/30"
+            className="lg:hidden relative w-14 h-14 bg-red-400/20 border border-red-400/30 rounded-xl flex items-center justify-center text-white hover:text-red-400 transition-all duration-300 hover:bg-red-400/30 shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <motion.svg
-              className="w-5 h-5"
+              className="w-7 h-7"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -172,14 +189,14 @@ export default function Navigation() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                   d="M6 18L18 6M6 6l12 12"
                 />
               ) : (
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               )}
@@ -213,7 +230,7 @@ export default function Navigation() {
             {navItems.map((item, index) => (
               <motion.button
                 key={index}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavClick(item)}
                 className="block w-full text-left text-gray-300 hover:text-white font-medium transition-all duration-300 py-4 px-6 hover:bg-red-400/10 rounded-lg group"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
