@@ -27,10 +27,29 @@ export default function SmoothCursor({
   const cursorPosition = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number>(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileDevice =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) ||
+        window.innerWidth <= 768 ||
+        "ontouchstart" in window;
+      setIsMobile(isMobileDevice);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    if (!cursor) return;
+    if (!cursor || isMobile) return;
 
     // Initialize trail elements
     const trailElements: HTMLDivElement[] = [];
@@ -141,7 +160,12 @@ export default function SmoothCursor({
         });
       }
     };
-  }, [size, color, trailLength, speed, showTrail]);
+  }, [size, color, trailLength, speed, showTrail, isMobile]);
+
+  // Don't render cursor on mobile devices
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div
